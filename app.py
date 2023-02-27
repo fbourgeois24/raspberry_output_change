@@ -34,12 +34,11 @@ def show_outputs():
 	frame = Frame(window)
 	frame.pack()
 	for id, name in outputs.items():
-		Button(frame, text=name, command=lambda id=id: change_output(id), width=width, height=10).pack()
+		Button(frame, text=name, command=lambda id=id: change_output(id), width=width, height=int(height/100)).pack()
 
 def change_output(id):
 	""" Changement de la sortie """
 	result = subprocess.run(f"sudo -u pi XDG_RUNTIME_DIR=/run/user/1000 pactl set-default-sink {id}", shell=True, capture_output=True)
-	print(result)
 	if result.returncode == 0:
 		lab_text.set("OK")
 		lab.config(fg="green")
@@ -55,12 +54,13 @@ window.title = "Changement de sortie audio"
 width = window.winfo_screenwidth()               
 height = window.winfo_screenheight()               
 window.geometry("%dx%d" % (width, height))
+print(height)
 
 lab_text = StringVar()
 lab = Label(window, textvariable=lab_text, font=("Helvetica, 20"))
 lab.pack()
 
-Button(window, text="Actualiser", command=show_outputs, width=width, height=10).pack()
+Button(window, text="Actualiser", command=show_outputs, width=width, height=int(height/100)).pack()
 
 
 show_outputs()
