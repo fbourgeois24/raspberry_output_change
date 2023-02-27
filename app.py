@@ -26,7 +26,9 @@ def list_outputs():
 
 def change_output(id):
 	""" Changement de la sortie """
+	print(f"sudo -u pi XDG_RUNTIME_DIR=/run/user/1000 pactl set-default-sink {id}")
 	result = subprocess.run(f"sudo -u pi XDG_RUNTIME_DIR=/run/user/1000 pactl set-default-sink {id}", shell=True)
+	print(result)
 	if result.returncode != 0:
 		return False
 	else:
@@ -43,11 +45,6 @@ outputs = list_outputs()
 
 for id, name in outputs.items():
 	Button(window, text=name, command=lambda: change_output(id)).pack()
-
-
-
-
-
 
 
 window.mainloop()
