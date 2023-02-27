@@ -22,6 +22,7 @@ def list_outputs():
 
 		interfaces[interface.split(" ")[0]] = name
 
+	print(interfaces)
 	return interfaces
 
 def change_output(id):
@@ -44,7 +45,7 @@ window.geometry("%dx%d" % (width, height))
 outputs = list_outputs()
 
 for id, name in outputs.items():
-	Button(window, text=name, command=lambda: change_output(id)).pack()
+	Button(window, text=name, command=lambda id=id: change_output(id)).pack()
 
 
 window.mainloop()
