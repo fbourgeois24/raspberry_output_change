@@ -21,7 +21,7 @@ def list_outputs():
 
 		interfaces[interface.split(" ")[0]] = name
 
-	print(interfaces)
+	interfaces = {0: "test"}
 	return interfaces
 
 def show_outputs():
@@ -39,13 +39,14 @@ def show_outputs():
 
 def change_output(id):
 	""" Changement de la sortie """
-	print(f"sudo -u pi XDG_RUNTIME_DIR=/run/user/1000 pactl set-default-sink {id}")
 	result = subprocess.run(f"sudo -u pi XDG_RUNTIME_DIR=/run/user/1000 pactl set-default-sink {id}", shell=True, capture_output=True)
 	print(result)
-	if result.returncode != 0:
-		return False
+	if result.returncode == 0:
+		lab_text.set("OK")
+		lab.config(fg="green")
 	else:
-		return True
+		lab_text.set(f"ERREUR : {result.stderr.decode()}")
+		lab.config(fg="red")
 
 
 window = Tk()
@@ -54,7 +55,9 @@ width = window.winfo_screenwidth()
 height = window.winfo_screenheight()               
 window.geometry("%dx%d" % (width, height))
 
-
+lab_text = StringVar()
+lab = Label(window, textvariable=lab_text, font=("Helvetica, 20"))
+lab.pack()
 
 Button(window, text="Actualiser", command=show_outputs, width=width, height=20).pack()
 
