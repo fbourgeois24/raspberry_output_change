@@ -35,7 +35,7 @@ def show_outputs():
 	frame = Frame(window)
 	frame.pack()
 	for id, name in outputs.items():
-		Button(frame, text=name, command=lambda id=id: change_output(id), width=width, height=int(height/len(outputs)+1)).pack()
+		Button(frame, text=name, command=lambda id=id: change_output(id), width=width, height=10).pack()
 
 def change_output(id):
 	""" Changement de la sortie """
@@ -59,7 +59,7 @@ lab_text = StringVar()
 lab = Label(window, textvariable=lab_text, font=("Helvetica, 20"))
 lab.pack()
 
-Button(window, text="Actualiser", command=show_outputs, width=width, height=20).pack()
+Button(window, text="Actualiser", command=show_outputs, width=width, height=10).pack()
 
 
 show_outputs()
