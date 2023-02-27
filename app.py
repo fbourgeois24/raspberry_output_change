@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from tkinter import *
 import subprocess
 
@@ -5,7 +6,7 @@ import subprocess
 def update_outputs():
 	""" Récupération de la liste des sorties disponibles """
 	interfaces_list_raw = subprocess.run("echo $(sudo -u pi XDG_RUNTIME_DIR=/run/user/1000 pacmd list-sinks)"
-	, shell=True, capture_output=True)
+	, shell=True, capture_output=True).stdout.decode()
 
 	print(interfaces_list_raw)
 
