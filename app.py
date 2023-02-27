@@ -21,7 +21,6 @@ def list_outputs():
 
 		interfaces[interface.split(" ")[0]] = name
 
-	interfaces = {0: "test"}
 	return interfaces
 
 def show_outputs():
