@@ -24,10 +24,20 @@ def list_outputs():
 	print(interfaces)
 	return interfaces
 
+def show_outputs():
+	""" Afficher la liste des sorties """
+	global frame
+	frame.destroy()
+	outputs = list_outputs()
+	frame = Frame(window)
+	frame.pack()
+	for id, name in outputs.items():
+		Button(frame, text=name, command=lambda id=id: change_output(id), width=width, height=height/len(outputs)).pack()
+
 def change_output(id):
 	""" Changement de la sortie """
 	print(f"sudo -u pi XDG_RUNTIME_DIR=/run/user/1000 pactl set-default-sink {id}")
-	result = subprocess.run(f"sudo -u pi XDG_RUNTIME_DIR=/run/user/1000 pactl set-default-sink {id}", shell=True)
+	result = subprocess.run(f"sudo -u pi XDG_RUNTIME_DIR=/run/user/1000 pactl set-default-sink {id}", shell=True, capture_output=True)
 	print(result)
 	if result.returncode != 0:
 		return False
@@ -41,10 +51,13 @@ width = window.winfo_screenwidth()
 height = window.winfo_screenheight()               
 window.geometry("%dx%d" % (width, height))
 
-outputs = list_outputs()
 
-for id, name in outputs.items():
-	Button(window, text=name, command=lambda id=id: change_output(id)).pack()
+
+Button(window, text="Actualiser", command=show_outputs, width=width, height=height/len(outputs+1)).pack()
+
+
+show_outputs()
+
 
 
 window.mainloop()
