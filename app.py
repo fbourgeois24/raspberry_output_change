@@ -32,7 +32,7 @@ def show_outputs():
 	frame = Frame(window)
 	frame.pack()
 	for id, name in outputs.items():
-		Button(frame, text=name, command=lambda id=id: change_output(id), width=width, height=height/len(outputs)).pack()
+		Button(frame, text=name, command=lambda id=id: change_output(id), width=width, height=height/len(outputs + 1)).pack()
 
 def change_output(id):
 	""" Changement de la sortie """
@@ -53,7 +53,7 @@ window.geometry("%dx%d" % (width, height))
 
 
 
-Button(window, text="Actualiser", command=show_outputs, width=width, height=height/len(outputs+1)).pack()
+Button(window, text="Actualiser", command=show_outputs, width=width, height=200).pack()
 
 
 show_outputs()
