@@ -47,6 +47,8 @@ def change_output(id):
 		lab_text.set(f"ERREUR : {result.stderr.decode()}")
 		lab.config(fg="red")
 
+	show_outputs()
+
 
 window = Tk()
 window.title = "Changement de sortie audio"
