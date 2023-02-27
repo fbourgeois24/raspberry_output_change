@@ -27,7 +27,10 @@ def list_outputs():
 def show_outputs():
 	""" Afficher la liste des sorties """
 	global frame
-	frame.destroy()
+	try:
+		frame.destroy()
+	except NameError:
+		pass
 	outputs = list_outputs()
 	frame = Frame(window)
 	frame.pack()
