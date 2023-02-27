@@ -56,7 +56,7 @@ window.geometry("%dx%d" % (width, height))
 
 
 
-Button(window, text="Actualiser", command=show_outputs, width=width, height=200).pack()
+Button(window, text="Actualiser", command=show_outputs, width=width, height=20).pack()
 
 
 show_outputs()
